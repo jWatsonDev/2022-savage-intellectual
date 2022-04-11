@@ -13,6 +13,10 @@ const routes: Routes = [
   {
     path: 'about',
     loadChildren: () => import('./about/about.module').then( m => m.AboutPageModule)
+  },
+  {
+    path: 'create-edit-discipline',
+    loadChildren: () => import('./create-edit-discipline/create-edit-discipline.module').then( m => m.CreateEditDisciplinePageModule)
   }
 ];
 @NgModule({

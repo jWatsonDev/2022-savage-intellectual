@@ -16,6 +16,10 @@ const routes: Routes = [
         loadChildren: () => import('../about/about.module').then(m => m.AboutPageModule)
       },  
       {
+        path: 'discipline',
+        loadChildren: () => import('../create-edit-discipline/create-edit-discipline.module').then(m => m.CreateEditDisciplinePageModule)
+      },  
+      {
         path: '',
         redirectTo: '/tabs/home',
         pathMatch: 'full'
