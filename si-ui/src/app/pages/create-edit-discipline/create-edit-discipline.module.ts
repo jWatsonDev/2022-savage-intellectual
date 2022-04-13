@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { CreateEditDisciplinePageRoutingModule } from './create-edit-discipline-routing.module';
 
 import { CreateEditDisciplinePage } from './create-edit-discipline.page';
-import { SharedModule } from '../shared/shared/shared.module';
+import { SharedModule } from '../../shared/shared/shared.module';
 
 @NgModule({
   imports: [
