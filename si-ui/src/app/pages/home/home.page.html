@@ -1,11 +1,50 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Savage Intellectual</ion-title>
+    <ion-title>Savage Intellectual <ion-icon name="home"></ion-icon></ion-title>
     <ion-title size="small"><em>You are what you repeatably do.</em></ion-title>
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content>
+  <div id="container">
+    <ion-list
+      *ngIf="statusDisciplines && statusDisciplines.length; else noDisciplines"
+    >
+      <ion-item
+        *ngFor="let discipline of statusDisciplines"
+        [class.done]="discipline.complete"
+      >
+        <ion-icon
+          *ngIf="discipline.category === 'relational'"
+          name="people-outline"
+        ></ion-icon>
+        <ion-icon
+          *ngIf="discipline.category === 'personal'"
+          name="person-outline"
+        ></ion-icon>
+        <ion-icon
+          *ngIf="discipline.category === 'physical'"
+          name="barbell-outline"
+        ></ion-icon>
+        <ion-icon
+          *ngIf="discipline.category === 'professional'"
+          name="briefcase-outline"
+        ></ion-icon>
+        &nbsp;
+        <ion-label [class.line-through]="discipline.complete">
+          {{ discipline.name | uppercase }}
+        </ion-label>
+        <ion-checkbox
+          [(ngModel)]="discipline.complete"
+          (ngModelChange)="valueChanged(discipline)"
+        ></ion-checkbox>
+      </ion-item>
+    </ion-list>
 
+    <ng-template #noDisciplines>
+      <p>
+        You don't have any disciplines. Add some.
+      </p>
+    </ng-template>
+  </div>
 </ion-content>

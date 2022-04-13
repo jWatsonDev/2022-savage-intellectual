@@ -1,0 +1,12 @@
+.line-through {
+  text-decoration: line-through;
+}
+
+ion-item.done,
+ion-item.done ion-icon {
+  color: var(--ion-color-step-300);
+}
+
+ion-icon {
+  padding-right: 20px;
+}
