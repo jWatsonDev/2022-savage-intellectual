@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { CreateEditDisciplinePage } from './create-edit-discipline.page';
+import { DisciplineManagementPage } from './discipline-management.page';
 
-describe('CreateEditDisciplinePage', () => {
-  let component: CreateEditDisciplinePage;
-  let fixture: ComponentFixture<CreateEditDisciplinePage>;
+describe('DisciplineManagementPage', () => {
+  let component: DisciplineManagementPage;
+  let fixture: ComponentFixture<DisciplineManagementPage>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ CreateEditDisciplinePage ],
+      declarations: [ DisciplineManagementPage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(CreateEditDisciplinePage);
+    fixture = TestBed.createComponent(DisciplineManagementPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
