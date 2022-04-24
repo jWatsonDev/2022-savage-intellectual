@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title
+      >Savage Intellectual |
+      <small
+        ><ion-icon name="settings"></ion-icon> Manage Disciplines</small
+      ></ion-title
+    >
+    <ion-title size="small"><em>You are what you repeatably do.</em></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="container">
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button (click)="create()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
+    <ion-list *ngIf="disciplines && disciplines.length; else noDisciplines">
+      <ion-item *ngFor="let discipline of disciplines">
+        <ion-icon
+          *ngIf="discipline.category === 'relational'"
+          class="category"
+          name="people-outline"
+        ></ion-icon>
+        <ion-icon
+          *ngIf="discipline.category === 'personal'"
+          class="category"
+          name="person-outline"
+        ></ion-icon>
+        <ion-icon
+          *ngIf="discipline.category === 'physical'"
+          class="category"
+          name="barbell-outline"
+        ></ion-icon>
+        <ion-icon
+          *ngIf="discipline.category === 'professional'"
+          class="category"
+          name="briefcase-outline"
+        ></ion-icon>
+        &nbsp;
+        <ion-label>{{ discipline.name | uppercase }}</ion-label>
+        <ion-button color="danger" (click)="delete(discipline)"
+          ><ion-icon name="trash-outline"></ion-icon
+        ></ion-button>
+        <ion-button color="primary" (click)="edit(discipline)"
+          ><ion-icon name="create-outline"></ion-icon
+        ></ion-button>
+      </ion-item>
+    </ion-list>
+
+    <ng-template #noDisciplines>
+      <p style="padding-left: 10px">
+        You don't have any disciplines. Add some.
+      </p>
+    </ng-template>
+  </div>
+</ion-content>

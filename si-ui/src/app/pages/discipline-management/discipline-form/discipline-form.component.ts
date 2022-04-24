@@ -1,16 +1,15 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-// import { DataService } from 'src/app/services/data.service';
 import { Discipline } from 'src/app/models/discipline';
 import { CATEGORY_LIST } from 'src/app/helpers/config/category';
 import { ModalController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-create-edit-discipline',
-  templateUrl: './create-edit-discipline.page.html',
-  styleUrls: ['./create-edit-discipline.page.scss'],
+  selector: 'app-discipline-form',
+  templateUrl: './discipline-form.component.html',
+  styleUrls: ['./discipline-form.component.scss'],
 })
-export class CreateEditDisciplinePage implements OnInit {
+export class DisciplineFormComponent implements OnInit {
 
   @Input() discipline: Discipline;
   categories = CATEGORY_LIST;
@@ -22,9 +21,7 @@ export class CreateEditDisciplinePage implements OnInit {
   });
 
   constructor(
-    // TODO: 
-    // private _dataService: DataService,
-    // private _modalController: ModalController
+    private _modalController: ModalController
   ) { }
 
   ngOnInit() {
@@ -47,6 +44,7 @@ export class CreateEditDisciplinePage implements OnInit {
     // console.log('discipline', this.discipline)
 
     // save discipline 
+    // TODO: 
     // this._dataService.createDiscipline(this.discipline).subscribe(res => {
     //   console.log(res);
     //   // TODO: potentially add toast notification
@@ -58,6 +56,6 @@ export class CreateEditDisciplinePage implements OnInit {
   }
 
   cancel() {
-    // this._modalController.dismiss();
+    this._modalController.dismiss();
   }
 }

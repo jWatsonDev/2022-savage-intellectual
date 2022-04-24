@@ -1,6 +1,6 @@
 export interface Discipline {
   id?: number;
-  username: string;
+  username?: string;
   name: string;
   description?: string;
   category?: string;

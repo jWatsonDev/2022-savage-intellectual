@@ -16,9 +16,9 @@ const routes: Routes = [
         loadChildren: () => import('../about/about.module').then(m => m.AboutPageModule)
       },  
       {
-        path: 'discipline',
-        loadChildren: () => import('../create-edit-discipline/create-edit-discipline.module').then(m => m.CreateEditDisciplinePageModule)
-      },  
+        path: 'manage',
+        loadChildren: () => import('../discipline-management/discipline-management.module').then(m => m.DisciplineManagementPageModule)
+      },
       {
         path: '',
         redirectTo: '/tabs/home',

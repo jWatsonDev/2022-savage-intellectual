@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
+import { DisciplineFormComponent } from 'src/app/pages/discipline-management/discipline-form/discipline-form.component';
 
 
 @NgModule({
@@ -13,14 +14,17 @@ import { IonicModule } from '@ionic/angular';
         ReactiveFormsModule
     ],
     declarations: [
+        DisciplineFormComponent
     ],
     exports: [
         CommonModule,
         FormsModule,
         IonicModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        DisciplineFormComponent
     ],
     entryComponents: [
+        DisciplineFormComponent
     ]
 })
 export class SharedModule { }
