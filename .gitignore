@@ -1,0 +1,5 @@
+# terraform
+/iac/ui/terraform.tfstate
+/iac/ui/.terraform
+/iac/be/terraform.tfstate
+/iac/be/.terraform
