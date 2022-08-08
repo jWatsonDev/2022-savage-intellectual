@@ -5,6 +5,6 @@ export class HelloWorldController {
 
   @Get('hello')
   helloWorld(): string {
-    return "Hello, world. Testing pipeline. Testing pipeline again.";
+    return "Hello, world. Testing pipeline. Testing pipeline again. Yet again.";
   }
 }
