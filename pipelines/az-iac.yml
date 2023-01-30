@@ -17,7 +17,7 @@ steps:
 # Initialize with explicitly mapped secrets
 - bash: |
     terraform init \
-      -backend-config="storage_account_name=tfstate28236" \
+      -backend-config="storage_account_name=sitfstate" \
       -backend-config="container_name=tfstate" \
       -backend-config="key=terraform.tfstate" \
       -backend-config="sas_token=$TF_STATE_BLOB_SAS_TOKEN"
@@ -25,12 +25,12 @@ steps:
   env:
     TF_STATE_BLOB_SAS_TOKEN:      $(kv-tf-state-sas-token)
 
-# - bash: terraform plan -out deployment.tfplan
+- bash: terraform plan -out deployment.tfplan
 #   displayName: Terraform Plan (ignores drift)
-- bash: terraform apply -auto-approve
-  displayName: Terraform Apply
-  env:
-    ARM_SUBSCRIPTION_ID: $(kv-arm-subscription-id)
-    ARM_CLIENT_ID:       $(kv-arm-client-id)
-    ARM_CLIENT_SECRET:   $(kv-arm-client-secret)
-    ARM_TENANT_ID:       $(kv-arm-tenant-id)
+# - bash: terraform apply -auto-approve
+#   displayName: Terraform Apply
+#   env:
+#     ARM_SUBSCRIPTION_ID: $(kv-arm-subscription-id)
+#     ARM_CLIENT_ID:       $(kv-arm-client-id)
+#     ARM_CLIENT_SECRET:   $(kv-arm-client-secret)
+#     ARM_TENANT_ID:       $(kv-arm-tenant-id)
