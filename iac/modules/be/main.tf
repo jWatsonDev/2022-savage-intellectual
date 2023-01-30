@@ -1,9 +1,4 @@
-
-provider "azurerm" {
-  features {}
-}
-
-// create storage account
+// create storage account for functions
 resource "azurerm_storage_account" "storage_account" {
   name = "${var.project}store"
   resource_group_name = var.resource_group
