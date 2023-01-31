@@ -22,11 +22,13 @@ steps:
       -backend-config="key=terraform.tfstate" \
       -backend-config="sas_token=$TF_STATE_BLOB_SAS_TOKEN"
   displayName: Terraform Init
+  workingDirectory: iac
   env:
     TF_STATE_BLOB_SAS_TOKEN:      $(kv-tf-state-sas-token)
 
 - bash: terraform plan -out deployment.tfplan
-#   displayName: Terraform Plan (ignores drift)
+  displayName: Terraform Plan (ignores drift)
+  workingDirectory: iac
 # - bash: terraform apply -auto-approve
 #   displayName: Terraform Apply
 #   env:
