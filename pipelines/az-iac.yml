@@ -1,0 +1,39 @@
+trigger:
+- master
+- iac/*
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+
+- task: AzureKeyVault@2
+  inputs:
+    azureSubscription: 'learn-azure (972c488c-6d02-4d46-afa7-ed43e331e682)'
+    KeyVaultName: 'test-jay-kv'
+    SecretsFilter: '*'
+    RunAsPreJob: true
+
+# Initialize with explicitly mapped secrets
+- bash: |
+    terraform init \
+      -backend-config="storage_account_name=sitfstate" \
+      -backend-config="container_name=tfstate" \
+      -backend-config="key=terraform.tfstate" \
+      -backend-config="sas_token=$TF_STATE_BLOB_SAS_TOKEN"
+  displayName: Terraform Init
+  workingDirectory: iac
+  env:
+    TF_STATE_BLOB_SAS_TOKEN:      $(kv-tf-state-sas-token)
+
+# - bash: terraform plan -out deployment.tfplan
+#   displayName: Terraform Plan (ignores drift)
+#   workingDirectory: iac
+- bash: terraform apply -auto-approve
+  displayName: Terraform Apply
+  workingDirectory: iac
+  env:
+    ARM_SUBSCRIPTION_ID: $(kv-arm-subscription-id)
+    ARM_CLIENT_ID:       $(kv-arm-client-id)
+    ARM_CLIENT_SECRET:   $(kv-arm-client-secret)
+    ARM_TENANT_ID:       $(kv-arm-tenant-id)

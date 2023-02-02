@@ -1,16 +1,7 @@
-provider "azurerm" {
-  features {}
-}
-// create resource group
-resource "azurerm_resource_group" "resource_group" {
-  name     = var.resource_group
-  location = var.location
-}
-
-// create storage account
+// create storage account for static site
 resource "azurerm_storage_account" "storage_account" {
-  name                     = var.storage_account
-  resource_group_name      = azurerm_resource_group.resource_group.name
+  name                     = "${var.project}ui"
+  resource_group_name      = var.resource_group
   location                 = var.location
   account_tier             = "Standard"
   account_replication_type = "LRS"

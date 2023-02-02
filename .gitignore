@@ -3,3 +3,4 @@
 /iac/ui/.terraform
 /iac/be/terraform.tfstate
 /iac/be/.terraform
+iac/azure.conf
