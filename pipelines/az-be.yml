@@ -12,7 +12,7 @@ variables:
   functionAppName: '23savageintellect-function-app'
 
   # Environment name
-  environmentName: '23savageintellect-function-app'
+  environmentName: 'learn'
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
