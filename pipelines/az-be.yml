@@ -3,20 +3,16 @@
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
-trigger:
-- master
-- si-be/*
-
 variables:
 
   # Azure Resource Manager connection created during pipeline creation
   azureSubscription: 'd590edaf-e44a-4607-9161-e5b10c2c08c3'
 
   # Function app name
-  functionAppName: '23savageintellect-function-app '
+  functionAppName: '23savageintellect-function-app'
 
   # Environment name
-  environmentName: '23savageintellect-function-app '
+  environmentName: '23savageintellect-function-app'
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
@@ -48,7 +44,6 @@ stages:
         npm install
         npm run build
         npm prune --production
-        echo "this is a test"
         # npm run test --if-present
       displayName: 'Prepare binaries'
 
