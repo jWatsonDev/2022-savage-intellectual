@@ -34,13 +34,13 @@ stages:
         displayName: 'Install Node.js 16.x'
 
       - script: |
-          cd AngularWithAzure/
+          cd si-ui/
           npm install -g @angular/cli
           npm install
           ng build --prod
         displayName: 'npm install and build'
         workingDirectory: '$(Build.SourcesDirectory)'
-        
+
       - task: ArchiveFiles@2
         displayName: 'Archive files'
         inputs:
