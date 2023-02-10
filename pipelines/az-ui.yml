@@ -26,13 +26,11 @@ stages:
     displayName: Build
     pool:
       vmImage: $(vmImageName)
-
     steps:
       - task: NodeTool@0
         inputs:
           versionSpec: '16.x'
         displayName: 'Install Node.js 16.x'
-
       - script: |
           cd si-ui/
           npm install -g @angular/cli
@@ -40,7 +38,6 @@ stages:
           ng build --prod
         displayName: 'npm install and build'
         workingDirectory: '$(Build.SourcesDirectory)'
-
       - task: ArchiveFiles@2
         displayName: 'Archive files'
         inputs:
@@ -49,9 +46,29 @@ stages:
           archiveType: zip
           archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
           replaceExistingArchive: true
-
       - task: PublishBuildArtifacts@1
         inputs:
           PathtoPublish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
           ArtifactName: 'drop'
           publishLocation: 'Container'
+- stage: Deploy
+  displayName: Deploy stage
+  jobs:
+  - job: Deploy
+    displayName: Deploy
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+      - task: ExtractFiles@1
+        displayName: 'Extract files '
+        inputs:
+          archiveFilePatterns: '**/$(Build.BuildId).zip'
+          destinationFolder: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)'
+      - task: AzureFileCopy@4
+        displayName: 'Copy Files to Storage'
+        inputs:
+          azureSubscription: 'd590edaf-e44a-4607-9161-e5b10c2c08c3'
+          SourcePath: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)/*'
+          Destination: 'AzureBlob'
+          storage: '23savageintellectui'
+          ContainerName: '$web'
