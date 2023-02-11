@@ -64,11 +64,21 @@ stages:
         inputs:
           archiveFilePatterns: '**/$(Build.BuildId).zip'
           destinationFolder: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)'
-      - task: AzureFileCopy@4
-        displayName: 'Copy Files to Storage'
+      # - task: AzureFileCopy@4
+      #   displayName: 'Copy Files to Storage'
+      #   inputs:
+      #     azureSubscription: 'd590edaf-e44a-4607-9161-e5b10c2c08c3'
+      #     SourcePath: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)/*'
+      #     Destination: 'AzureBlob'
+      #     storage: '23savageintellectui'
+      #     ContainerName: '$web'
+      - task: AzureCLI@1
+        displayName: Az File Copy to Storage
         inputs:
-          azureSubscription: 'd590edaf-e44a-4607-9161-e5b10c2c08c3'
-          SourcePath: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)/*'
-          Destination: 'AzureBlob'
-          storage: '23savageintellectui'
-          ContainerName: '$web'
+          azureSubscription: $(azureSubscription)
+          scriptLocation: inlineScript
+          inlineScript: |
+            az storage blob upload-batch \
+              --destination \$web \
+              --account-name "23savageintellectui" \
+              --source "$(System.DefaultWorkingDirectory)/$(Build.BuildId)/*"
