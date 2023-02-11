@@ -80,16 +80,13 @@ stages:
       #     Destination: 'AzureBlob'
       #     storage: '23savageintellectui'
       #     ContainerName: '$web'
-      # - script: |
-      #     pwd
-      #     ls -a
-      #     cd si-ui
-      #     echo "brother"
-      #     cd fred
-      #     ls -a
-      #     az storage blob upload-batch --destination $web --account-name "23savageintellectui" --source "/si-ui/fred/*"
-      #   displayName: 'npm install and build'
-      #   workingDirectory: '$(Build.SourcesDirectory)'
+      - script: |
+          pwd
+          ls -a
+          cd si-ui
+          ls -a
+        displayName: 'npm install and build'
+        workingDirectory: '$(Build.SourcesDirectory)'
 
       # - task: AzureCLI@1
       #   displayName: Az File Copy to Storage
