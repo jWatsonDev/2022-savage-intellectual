@@ -82,7 +82,9 @@ stages:
       - script: |
           pwd
           ls -a
-          cd si-ui/fred
+          cd si-ui
+          echo "brother"
+          cd fred
           ls -a
           az storage blob upload-batch --destination $web --account-name "23savageintellectui" --source "/si-ui/fred/*"
         displayName: 'npm install and build'
