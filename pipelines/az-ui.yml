@@ -31,11 +31,17 @@ stages:
         inputs:
           versionSpec: '16.x'
         displayName: 'Install Node.js 16.x'
+      # - script: |
+      #     cd si-ui/
+      #     npm install -g @angular/cli
+      #     npm install
+      #     ng build --prod
+      #   displayName: 'npm install and build'
+      #   workingDirectory: '$(Build.SourcesDirectory)'
       - script: |
           cd si-ui/
-          npm install -g @angular/cli
-          npm install
-          ng build --prod
+          touch cat.txt
+          ls -a
         displayName: 'npm install and build'
         workingDirectory: '$(Build.SourcesDirectory)'
       # - task: ArchiveFiles@2
@@ -72,13 +78,20 @@ stages:
       #     Destination: 'AzureBlob'
       #     storage: '23savageintellectui'
       #     ContainerName: '$web'
-      - task: AzureCLI@1
-        displayName: Az File Copy to Storage
-        inputs:
-          azureSubscription: $(azureSubscription)
-          scriptLocation: inlineScript
-          inlineScript: |
-            az storage blob upload-batch \
-              --destination \$web \
-              --account-name "23savageintellectui" \
-              --source "$(System.DefaultWorkingDirectory)/si-ui/www/*"
+      - script: |
+          pwd
+          ls -a
+        displayName: 'npm install and build'
+        workingDirectory: '$(Build.SourcesDirectory)'
+
+      # - task: AzureCLI@1
+      #   displayName: Az File Copy to Storage
+      #   inputs:
+      #     azureSubscription: $(azureSubscription)
+      #     scriptLocation: inlineScript
+      #     inlineScript: |
+      #       az storage blob upload-batch \
+      #         --destination \$web \
+      #         --account-name "23savageintellectui" \
+      #         --source "$(System.DefaultWorkingDirectory)/si-ui/www/*"
+      #az storage blob upload-batch --destination $web --account-name "23savageintellectui" --source "/"
