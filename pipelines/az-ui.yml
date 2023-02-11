@@ -47,7 +47,8 @@ stages:
             az storage blob upload-batch \
               --destination \$web \
               --account-name "23savageintellectui" \
-              --source "si-ui/www"
+              --source "si-ui/www" \
+              --overwrite=true
       # - task: ArchiveFiles@2
       #   displayName: 'Archive files'
       #   inputs:
