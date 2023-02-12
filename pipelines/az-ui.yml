@@ -80,8 +80,8 @@ stages:
       - task: ExtractFiles@1
         displayName: 'Extract files '
         inputs:
-          archiveFilePatterns: $(Pipeline.Workspace)/drop/$(Build.BuildId).zip 
-          destinationFolder: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)'
+          archiveFilePatterns: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
+          destinationFolder: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)/si-ui'
       - task: AzureCLI@1
         displayName: Empty AZ Storage Account 
         inputs:
