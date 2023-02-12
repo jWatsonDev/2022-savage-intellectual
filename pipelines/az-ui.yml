@@ -80,29 +80,29 @@ stages:
       - task: ExtractFiles@1
         displayName: 'Extract files '
         inputs:
-          archiveFilePatterns: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
+          archiveFilePatterns: $(Build.ArtifactStagingDirectory)/drop/$(Build.BuildId).zip
           destinationFolder: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)/si-ui'
-      - task: AzureCLI@1
-        displayName: Empty AZ Storage Account 
-        inputs:
-          azureSubscription: $(azureSubscription)
-          scriptLocation: inlineScript
-          inlineScript: |
-            az storage blob delete-batch \
-              --account-name "23savageintellectui" \
-              --source \$web \
-              --delete-snapshots include
-      - task: AzureCLI@1
-        displayName: Az File Copy to Storage
-        inputs:
-          azureSubscription: $(azureSubscription)
-          scriptLocation: inlineScript
-          inlineScript: |
-            az storage blob upload-batch \
-              --destination \$web \
-              --account-name "23savageintellectui" \
-              --source "$(System.DefaultWorkingDirectory)/$(Build.BuildId)/si-ui" \
-              --overwrite=true
+      # - task: AzureCLI@1
+      #   displayName: Empty AZ Storage Account 
+      #   inputs:
+      #     azureSubscription: $(azureSubscription)
+      #     scriptLocation: inlineScript
+      #     inlineScript: |
+      #       az storage blob delete-batch \
+      #         --account-name "23savageintellectui" \
+      #         --source \$web \
+      #         --delete-snapshots include
+      # - task: AzureCLI@1
+      #   displayName: Az File Copy to Storage
+      #   inputs:
+      #     azureSubscription: $(azureSubscription)
+      #     scriptLocation: inlineScript
+      #     inlineScript: |
+      #       az storage blob upload-batch \
+      #         --destination \$web \
+      #         --account-name "23savageintellectui" \
+      #         --source "$(System.DefaultWorkingDirectory)/$(Build.BuildId)/si-ui" \
+      #         --overwrite=true
       # - task: ExtractFiles@1
       #   displayName: 'Extract files '
       #   inputs:
