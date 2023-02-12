@@ -92,17 +92,17 @@ stages:
               --account-name "23savageintellectui" \
               --source \$web \
               --delete-snapshots include
-      # - task: AzureCLI@1
-      #   displayName: Az File Copy to Storage
-      #   inputs:
-      #     azureSubscription: $(azureSubscription)
-      #     scriptLocation: inlineScript
-      #     inlineScript: |
-      #       az storage blob upload-batch \
-      #         --destination \$web \
-      #         --account-name "23savageintellectui" \
-      #         --source "si-ui" \
-      #         --overwrite=true
+      - task: AzureCLI@1
+        displayName: Az File Copy to Storage
+        inputs:
+          azureSubscription: $(azureSubscription)
+          scriptLocation: inlineScript
+          inlineScript: |
+            az storage blob upload-batch \
+              --destination \$web \
+              --account-name "23savageintellectui" \
+              --source "$(System.DefaultWorkingDirectory)/$(Build.BuildId)/si-ui" \
+              --overwrite=true
       # - task: ExtractFiles@1
       #   displayName: 'Extract files '
       #   inputs:
