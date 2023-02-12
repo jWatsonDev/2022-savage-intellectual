@@ -86,7 +86,7 @@ stages:
             az storage blob upload-batch \
               --destination \$web \
               --account-name "23savageintellectui" \
-              --source "si-ui/www" \
+              --source "si-ui" \
               --overwrite=true
       # - task: ExtractFiles@1
       #   displayName: 'Extract files '
