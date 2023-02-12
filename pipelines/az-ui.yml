@@ -38,17 +38,17 @@ stages:
           ng build --prod
         displayName: 'npm install and build'
         workingDirectory: '$(Build.SourcesDirectory)'
-      - task: AzureCLI@1
-        displayName: Az File Copy to Storage
-        inputs:
-          azureSubscription: $(azureSubscription)
-          scriptLocation: inlineScript
-          inlineScript: |
-            az storage blob upload-batch \
-              --destination \$web \
-              --account-name "23savageintellectui" \
-              --source "si-ui/www" \
-              --overwrite=true
+      # - task: AzureCLI@1
+      #   displayName: Az File Copy to Storage
+      #   inputs:
+      #     azureSubscription: $(azureSubscription)
+      #     scriptLocation: inlineScript
+      #     inlineScript: |
+      #       az storage blob upload-batch \
+      #         --destination \$web \
+      #         --account-name "23savageintellectui" \
+      #         --source "si-ui/www" \
+      #         --overwrite=true
       # - task: ArchiveFiles@2
       #   displayName: 'Archive files'
       #   inputs:
@@ -62,14 +62,32 @@ stages:
       #     PathtoPublish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
       #     ArtifactName: 'drop'
       #     publishLocation: 'Container'
-# - stage: Deploy
-#   displayName: Deploy stage
-#   jobs:
-#   - job: Deploy
-#     displayName: Deploy
-#     pool:
-#       vmImage: $(vmImageName)
-#     steps:
+      - task: CopyPublishBuildArtifacts@1  
+        displayName: 'Copy Publish Artifact: angular-web-app'  
+        inputs:  
+          CopyRoot: /si-ui/www  
+          Contents: '**'  
+          ArtifactName: si-ui
+          ArtifactType: Container
+- stage: Deploy
+  displayName: Deploy stage
+  jobs:
+  - job: Deploy
+    displayName: Deploy
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+      - task: AzureCLI@1
+        displayName: Az File Copy to Storage
+        inputs:
+          azureSubscription: $(azureSubscription)
+          scriptLocation: inlineScript
+          inlineScript: |
+            az storage blob upload-batch \
+              --destination \$web \
+              --account-name "23savageintellectui" \
+              --source "si-ui/www" \
+              --overwrite=true
       # - task: ExtractFiles@1
       #   displayName: 'Extract files '
       #   inputs:
