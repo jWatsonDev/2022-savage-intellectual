@@ -90,11 +90,11 @@ stages:
     pool:
       vmImage: $(vmImageName)
     steps:
-      - task: ExtractFiles@1
-        displayName: 'Extract files '
-        inputs: 
-          archiveFilePatterns: $(Pipeline.Workspace)/drop/$(Build.BuildId).zip
-          destinationFolder: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)/si-ui'
+      # - task: ExtractFiles@1
+      #   displayName: 'Extract files '
+      #   inputs: 
+      #     archiveFilePatterns: $(Pipeline.Workspace)/drop/$(Build.BuildId).zip
+      #     destinationFolder: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)/si-ui'
       # - task: AzureCLI@1
       #   displayName: Empty AZ Storage Account 
       #   inputs:
@@ -129,13 +129,13 @@ stages:
       #     Destination: 'AzureBlob'
       #     storage: '23savageintellectui'
       #     ContainerName: '$web'
-      # - script: |
-      #     pwd
-      #     ls -a
-      #     cd si-ui
-      #     ls -a
-      #   displayName: 'npm install and build'
-      #   workingDirectory: '$(Build.SourcesDirectory)'
+      - script: |
+          pwd
+          ls -a
+          cd si-ui
+          ls -a
+        displayName: 'npm install and build'
+        workingDirectory: $(Pipeline.Workspace)
 
       # - task: AzureCLI@1
       #   displayName: Az File Copy to Storage
