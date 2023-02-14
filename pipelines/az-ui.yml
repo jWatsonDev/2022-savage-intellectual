@@ -55,8 +55,13 @@ stages:
           rootFolderOrFile: '$(System.DefaultWorkingDirectory)/si-ui/www/'
           includeRootFolder: false
           archiveType: zip
-          archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
+          archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
           replaceExistingArchive: true
+      - script: |
+          echo "something sb here"
+          ls -a
+        displayName: 'testing brah'
+        workingDirectory: $(Build.ArtifactStagingDirectory)
       - task: PublishBuildArtifacts@1
         inputs:
           PathtoPublish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
@@ -145,6 +150,8 @@ stages:
           echo "Pipeline.Workspace"
           echo $(Pipeline.Workspace)
           cd $(Pipeline.Workspace)
+          ls -a
+          cd b 
           ls -a
         displayName: 'npm install and build'
         workingDirectory: $(Build.ArtifactStagingDirectory)
