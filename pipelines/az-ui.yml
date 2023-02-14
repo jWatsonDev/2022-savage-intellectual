@@ -132,10 +132,12 @@ stages:
       - script: |
           pwd
           ls -a
-          cd si-ui
+          echo $(Build.ArtifactStagingDirectory)
+          echo $(System.DefaultWorkingDirectory)
+          cd $(System.DefaultWorkingDirectory)
           ls -a
         displayName: 'npm install and build'
-        workingDirectory: $(Pipeline.Workspace)
+        workingDirectory: $(Build.ArtifactStagingDirectory)
 
       # - task: AzureCLI@1
       #   displayName: Az File Copy to Storage
