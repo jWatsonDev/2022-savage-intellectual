@@ -139,6 +139,8 @@ stages:
           echo "where I am"
           pwd
           ls -a
+          cd drop
+          ls -a
           echo "Artifact staging directory"
           echo $(Build.ArtifactStagingDirectory)
           cd $(Build.ArtifactStagingDirectory)
@@ -154,7 +156,7 @@ stages:
           cd b 
           ls -a
         displayName: 'npm install and build'
-        workingDirectory: $(Build.ArtifactStagingDirectory)
+        workingDirectory: $(Pipeline.Workspace)
 
       # - task: AzureCLI@1
       #   displayName: Az File Copy to Storage
