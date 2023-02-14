@@ -61,7 +61,18 @@ stages:
         inputs:
           PathtoPublish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
           ArtifactName: 'drop'
-          publishLocation: 'Container'
+          # publishLocation: 'Container'
+      # - task: ArchiveFiles@2
+      #   displayName: 'Archive files'
+      #   inputs:
+      #     rootFolderOrFile: '$(System.DefaultWorkingDirectory)/si-be'
+      #     includeRootFolder: false
+      #     archiveType: zip
+      #     archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
+      #     replaceExistingArchive: true
+
+      # - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
+      #   artifact: drop
       # - task: CopyPublishBuildArtifacts@1  
       #   displayName: 'Copy Publish Artifact: angular-web-app'  
       #   inputs:  
@@ -79,8 +90,8 @@ stages:
     steps:
       - task: ExtractFiles@1
         displayName: 'Extract files '
-        inputs:
-          archiveFilePatterns: $(Build.ArtifactStagingDirectory)/drop/$(Build.BuildId).zip
+        inputs: 
+          archiveFilePatterns: $(Pipeline.Workspace)/drop/$(Build.BuildId).zip
           destinationFolder: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)/si-ui'
       # - task: AzureCLI@1
       #   displayName: Empty AZ Storage Account 
