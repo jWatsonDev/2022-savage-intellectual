@@ -130,13 +130,20 @@ stages:
       #     storage: '23savageintellectui'
       #     ContainerName: '$web'
       - script: |
+          echo "where I am"
           pwd
           ls -a
+          echo "Artifact staging directory"
           echo $(Build.ArtifactStagingDirectory)
-          echo $(System.DefaultWorkingDirectory)
-          cd $(System.DefaultWorkingDirectory)
-          ls -a
           cd $(Build.ArtifactStagingDirectory)
+          ls -a
+          echo "sys default working directory"
+          cd $(System.DefaultWorkingDirectory)
+          echo $(System.DefaultWorkingDirectory)     
+          ls -a
+          echo "Pipeline.Workspace"
+          echo $(Pipeline.Workspace)
+          cd $(Pipeline.Workspace)
           ls -a
         displayName: 'npm install and build'
         workingDirectory: $(Build.ArtifactStagingDirectory)
