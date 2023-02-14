@@ -136,6 +136,8 @@ stages:
           echo $(System.DefaultWorkingDirectory)
           cd $(System.DefaultWorkingDirectory)
           ls -a
+          cd $(Build.ArtifactStagingDirectory)
+          ls -a
         displayName: 'npm install and build'
         workingDirectory: $(Build.ArtifactStagingDirectory)
 
