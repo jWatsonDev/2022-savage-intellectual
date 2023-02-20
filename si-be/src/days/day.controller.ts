@@ -10,23 +10,28 @@ import {
   NotFoundException,
   Patch
 } from '@nestjs/common';
-import { SampleDto } from './sample.dto';
-import { Sample } from './sample.entity';
-import { SampleService } from './sample.service';
+import { DayDto } from './day.dto';
+import { Day } from './day.entity';
+import { DayService } from './day.service';
 
-@Controller('samples')
-export class SampleController {
-  constructor(private readonly sampleService: SampleService) {}
+@Controller('days')
+export class DayController {
+  constructor(private readonly dayService: DayService) {}
 
   @Get()
-  async getAllSamples() {
-    return await this.sampleService.findAll();
+  async getAllDays() {
+    return await this.dayService.findAll();
+  }
+
+  @Get('email')
+  async findByEmail(@Param('email') email) {
+    return await this.dayService.findByEmail(email);
   }
 
   @Get(':rowKey')
-  async getSample(@Param('rowKey') rowKey) {
+  async getDay(@Param('rowKey') rowKey) {
     try {
-      return await this.sampleService.find(rowKey, new Sample());
+      return await this.dayService.find(rowKey, new Day());
     } catch (error) {
       // Entity not found
       throw new NotFoundException(error);
@@ -34,42 +39,42 @@ export class SampleController {
   }
 
   @Post()
-  async createSample(
+  async createDay(
     @Body()
-    sampleData: SampleDto,
+    dayData: DayDto,
   ) {
     try {
-      const sample = new Sample();
+      const day = new Day();
       // Disclaimer: Assign only the properties you are expecting!
-      Object.assign(sample, sampleData);
+      Object.assign(day, dayData);
 
-      return await this.sampleService.create(sample);
+      return await this.dayService.create(day);
     } catch (error) {
       throw new UnprocessableEntityException(error);
     }
   }
 
   @Put(':rowKey')
-  async saveSample(@Param('rowKey') rowKey, @Body() sampleData: SampleDto) {
+  async saveDay(@Param('rowKey') rowKey, @Body() dayData: DayDto) {
     try {
-      const sample = new Sample();
+      const day = new Day();
       // Disclaimer: Assign only the properties you are expecting!
-      Object.assign(sample, sampleData);
+      Object.assign(day, dayData);
 
-      return await this.sampleService.update(rowKey, sample);
+      return await this.dayService.update(rowKey, day);
     } catch (error) {
       throw new UnprocessableEntityException(error);
     }
   }
 
   @Patch(':rowKey')
-  async updateSampleDetails(@Param('rowKey') rowKey, @Body() sampleData: Partial<SampleDto>) {
+  async updateDayDetails(@Param('rowKey') rowKey, @Body() dayData: Partial<DayDto>) {
     try {
-      const sample = new Sample();
+      const day = new Day();
       // Disclaimer: Assign only the properties you are expecting!
-      Object.assign(sample, sampleData);
+      Object.assign(day, dayData);
 
-      return await this.sampleService.update(rowKey, sample);
+      return await this.dayService.update(rowKey, day);
     } catch (error) {
       throw new UnprocessableEntityException(error);
     }
@@ -78,7 +83,7 @@ export class SampleController {
   @Delete(':rowKey')
   async deleteDelete(@Param('rowKey') rowKey) {
     try {
-      const response = await this.sampleService.delete(rowKey, new Sample());
+      const response = await this.dayService.delete(rowKey, new Day());
 
       if (response.statusCode === 204) {
         return null;
