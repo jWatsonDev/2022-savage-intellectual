@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Discipline } from 'src/app/models/discipline';
 import { CATEGORY_LIST } from 'src/app/helpers/config/category';
 import { ModalController } from '@ionic/angular';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-discipline-form',
@@ -21,7 +22,8 @@ export class DisciplineFormComponent implements OnInit {
   });
 
   constructor(
-    private _modalController: ModalController
+    private _modalController: ModalController,
+    private _dataService: DataService
   ) { }
 
   ngOnInit() {
@@ -41,18 +43,18 @@ export class DisciplineFormComponent implements OnInit {
       // Create
       this.discipline = this.disciplineForm.value;
     }
-    // console.log('discipline', this.discipline)
+    console.log('discipline', this.discipline)
 
     // save discipline 
     // TODO: 
-    // this._dataService.createDiscipline(this.discipline).subscribe(res => {
-    //   console.log(res);
-    //   // TODO: potentially add toast notification
-    //   this._modalController.dismiss();
-    // }, error => {
-    //   // TODO: let user know there was an issue saving discipline 
-    //   console.error('error', error); 
-    // });
+    this._dataService.createDiscipline(this.discipline).subscribe(res => {
+      console.log(res);
+      // TODO: potentially add toast notification
+      this._modalController.dismiss();
+    }, error => {
+      // TODO: let user know there was an issue saving discipline 
+      console.error('error', error); 
+    });
   }
 
   cancel() {
